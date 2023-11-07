@@ -3,7 +3,7 @@
 //  PokeAPI
 //
 //  Created by Diggo Silva on 07/11/23.
-// https://pokeapi.co/api/v2/pokemon?limit=200
+// https://pokeapi.co/api/v2/pokemon?limit=200/
 
 import Foundation
 
@@ -14,19 +14,19 @@ struct Service {
         
     }
     
-    func getPokeName(completion: @escaping([Result]) -> Void) {
+    func getPokeName(completion: @escaping([Results]) -> Void) {
         guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=200") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data, error == nil else { return }
             do {
-                let pokeName = try JSONDecoder().decode(PokemonName.self, from: data)
+                let pokeName = try JSONDecoder().decode(PokeResult.self, from: data)
                 DispatchQueue.main.async {
                     completion(pokeName.results)
                     print(pokeName)
                 }
             } catch {
-                print(error.localizedDescription)
+                print("Erro no NOME \(error.localizedDescription)")
             }
         }.resume()
     }
