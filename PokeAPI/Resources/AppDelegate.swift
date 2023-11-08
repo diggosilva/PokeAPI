@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(red: 222/255, green: 97/255, blue: 84/255, alpha: 1.0) /* #de6154 */
+        appearance.backgroundColor = UIColor.orangePokeAPI
         appearance.titleTextAttributes = [.foregroundColor: UIColor.label]
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         

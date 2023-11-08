@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92010A4A2AFBBA6300C565B9 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92010A492AFBBA6300C565B9 /* Color+Extensions.swift */; };
 		921F8F022AFAC703008AAFC8 /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921F8F012AFAC703008AAFC8 /* PokemonModel.swift */; };
 		921F8F042AFAC72C008AAFC8 /* PokemonSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921F8F032AFAC72C008AAFC8 /* PokemonSelected.swift */; };
 		929689C42AFAAE6900D455F9 /* PokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929689C32AFAAE6900D455F9 /* PokeView.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		92010A492AFBBA6300C565B9 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		921F8F012AFAC703008AAFC8 /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
 		921F8F032AFAC72C008AAFC8 /* PokemonSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSelected.swift; sourceTree = "<group>"; };
 		929689C32AFAAE6900D455F9 /* PokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeView.swift; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92010A482AFBBA4500C565B9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				92010A492AFBBA6300C565B9 /* Color+Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		92D8FEB72AFA97B000CD0531 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +78,7 @@
 		92D8FEC22AFA97B000CD0531 /* PokeAPI */ = {
 			isa = PBXGroup;
 			children = (
+				92010A482AFBBA4500C565B9 /* Utils */,
 				92D8FED72AFA992500CD0531 /* Resources */,
 				92D8FED82AFA998700CD0531 /* Service.swift */,
 				921F8F032AFAC72C008AAFC8 /* PokemonSelected.swift */,
@@ -173,6 +184,7 @@
 				921F8F042AFAC72C008AAFC8 /* PokemonSelected.swift in Sources */,
 				92D8FED92AFA998700CD0531 /* Service.swift in Sources */,
 				92D8FEC42AFA97B000CD0531 /* AppDelegate.swift in Sources */,
+				92010A4A2AFBBA6300C565B9 /* Color+Extensions.swift in Sources */,
 				92D8FEC62AFA97B000CD0531 /* SceneDelegate.swift in Sources */,
 				929689C62AFAB48A00D455F9 /* PokeCell.swift in Sources */,
 				92D8FEDB2AFA9A1400CD0531 /* PokeResult.swift in Sources */,

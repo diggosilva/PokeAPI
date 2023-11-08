@@ -16,8 +16,9 @@ class PokeCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "person.fill")
-        imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .systemGray4
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.orangePokeAPI.cgColor
         imageView.layer.cornerRadius = 40
         imageView.clipsToBounds = true
         return imageView
@@ -27,6 +28,7 @@ class PokeCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Nome do Pokemon"
+        label.textColor = .orangePokeAPI
         label.font = .monospacedSystemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -40,9 +42,10 @@ class PokeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(model: Results) {
+    func configure(model: PokemonModel) {
+        guard let url = URL(string: model.image) else { return }
         DispatchQueue.main.async {
-            self.pokeImage.image = UIImage(systemName: "person.fill")
+            self.pokeImage.sd_setImage(with: url)
             self.pokeLabel.text = model.name.capitalized
         }
     }
@@ -53,6 +56,7 @@ class PokeCell: UITableViewCell {
     }
     
     private func setHierarchy () {
+        backgroundColor = .systemGray6
         contentView.addSubview(pokeImage)
         contentView.addSubview(pokeLabel)
     }

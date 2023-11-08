@@ -23,10 +23,25 @@ struct Service {
                 let pokeName = try JSONDecoder().decode(PokeResult.self, from: data)
                 DispatchQueue.main.async {
                     completion(pokeName.results)
-                    print(pokeName)
                 }
             } catch {
-                print("Erro no NOME \(error.localizedDescription)")
+                print("Erro no NOME: \(error.localizedDescription)")
+            }
+        }.resume()
+    }
+    
+    func getPokeImage(name: String, completion: @escaping(String) -> Void) {
+        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon/\(name)") else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data, error == nil else { return }
+            do {
+                let pokeImage = try JSONDecoder().decode(PokemonSelected.self, from: data)
+                DispatchQueue.main.async {
+                    completion(pokeImage.sprites.other.officialArtwork.frontDefault)
+                }
+            } catch {
+                print("Erro na IMAGEM: \(error.localizedDescription)")
             }
         }.resume()
     }

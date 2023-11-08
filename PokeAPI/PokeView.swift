@@ -8,6 +8,15 @@
 import UIKit
 
 class PokeView: UIView {
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = UIColor.orangePokeAPI
+        indicator.style = .large
+        indicator.startAnimating()
+        return indicator
+    }()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +41,7 @@ class PokeView: UIView {
     
     private func setHierarchy () {
         addSubview(tableView)
+        addSubview(activityIndicator)
     }
     
     private func setConstraints() {
@@ -40,6 +50,9 @@ class PokeView: UIView {
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
 }

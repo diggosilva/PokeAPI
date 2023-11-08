@@ -12,9 +12,8 @@ class ViewController: UIViewController {
     
     private let pokeView = PokeView()
     private let service = Service.shared
-    private var pokemons: [Results] = []
-    
-    let dispatchGroup = DispatchGroup()
+    private let dispatchGroup = DispatchGroup()
+    private var pokemons: [PokemonModel] = []
     
     override func loadView() {
         super.loadView()
@@ -38,15 +37,22 @@ class ViewController: UIViewController {
     }
     
     private func fetchData() {
+        dispatchGroup.enter()
         service.getPokeName { results in
-            DispatchQueue.main.async {
-                self.pokemons = results
-                self.pokeView.tableView.reloadData()
-                print(results)
+            for result in results {
+                self.dispatchGroup.enter()
+                self.service.getPokeImage(name: result.name) { image in
+                    self.pokemons.append(PokemonModel(image: image, name: result.name))
+                    self.dispatchGroup.leave()
+                }
             }
+            self.dispatchGroup.leave()
+        }
+        dispatchGroup.notify(queue: .main) {
+            self.pokeView.tableView.reloadData()
+            self.pokeView.activityIndicator.stopAnimating()
         }
     }
-    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -61,6 +67,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
