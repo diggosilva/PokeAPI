@@ -26,7 +26,7 @@ class PokeDetailsViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .white
         imageView.image = UIImage(systemName: "person.fill")
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.orangePokeAPI.cgColor
         imageView.layer.cornerRadius = 10
@@ -50,12 +50,19 @@ class PokeDetailsViewController: UIViewController {
     }()
     
     lazy var nameLabel: UILabel = {
-        Factory.buildLabel(text: "Nome do Pokemon", font: .monospacedSystemFont(ofSize: 20, weight: .semibold))
+        Factory.buildLabel(text: "Nome do Pokemon", font: .monospacedSystemFont(ofSize: 20, weight: .bold))
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        configNavigationBar()
+    }
+    
+    private func configNavigationBar() {
+        let imageView = UIImageView(image: UIImage(named: "logo"))
+        imageView.contentMode = .scaleAspectFit
+        navigationItem.titleView = imageView
     }
     
     private func setupView() {
@@ -64,7 +71,7 @@ class PokeDetailsViewController: UIViewController {
     }
     
     private func setHierarchy () {
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .systemGray5
         view.addSubview(cardView)
         view.addSubview(nameLabel)
         cardView.addSubview(imageView)

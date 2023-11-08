@@ -28,7 +28,9 @@ class ViewController: UIViewController {
     }
     
     private func configNavigationBar() {
-        title = "PokeAPI"
+        let imageView = UIImageView(image: UIImage(named: "logo"))
+        imageView.contentMode = .scaleAspectFit
+        navigationItem.titleView = imageView
     }
     
     private func setupTableViewDelegatesAndDataSources() {
@@ -37,21 +39,21 @@ class ViewController: UIViewController {
     }
     
     private func fetchData() {
-//        dispatchGroup.enter()
-//        service.getPokeName { results in
-//            for result in results {
-//                self.dispatchGroup.enter()
-//                self.service.getPokeImage(name: result.name) { image in
-//                    self.pokemons.append(PokemonModel(image: image, name: result.name))
-//                    self.dispatchGroup.leave()
-//                }
-//            }
-//            self.dispatchGroup.leave()
-//        }
-//        dispatchGroup.notify(queue: .main) {
-//            self.pokeView.tableView.reloadData()
-//            self.pokeView.activityIndicator.stopAnimating()
-//        }
+        dispatchGroup.enter()
+        service.getPokeName { results in
+            for result in results {
+                self.dispatchGroup.enter()
+                self.service.getPokeImage(name: result.name) { image,height,weight,experience,id  in
+                    self.pokemons.append(PokemonModel(height: height, weight: weight, experience: experience, id: id, image: image, name: result.name))
+                    self.dispatchGroup.leave()
+                }
+            }
+            self.dispatchGroup.leave()
+        }
+        dispatchGroup.notify(queue: .main) {
+            self.pokeView.tableView.reloadData()
+            self.pokeView.activityIndicator.stopAnimating()
+        }
     }
 }
 
@@ -68,5 +70,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let vc = PokeDetailsViewController()
+        let pokeSelected = pokemons[indexPath.row]
+        guard let url = URL(string: pokeSelected.image) else { return }
+        DispatchQueue.main.async {
+            vc.imageView.sd_setImage(with: url)
+            vc.heightLabel.text = "Altura: \(pokeSelected.height)cm"
+            vc.weightLabel.text = "Peso: \(pokeSelected.weight)g"
+            vc.experienceLabel.text = "XP: \(pokeSelected.experience)"
+            vc.idLabel.text = "ID: \(pokeSelected.id)"
+            vc.nameLabel.text = "\(pokeSelected.name)".capitalized
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

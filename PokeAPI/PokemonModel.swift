@@ -8,6 +8,10 @@
 import Foundation
 
 struct PokemonModel {
+    let height: Int
+    let weight: Int
+    let experience: Int
+    let id: Int
     let image: String
     let name: String
 }
