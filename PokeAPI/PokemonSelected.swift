@@ -8,7 +8,19 @@
 import Foundation
 
 struct PokemonSelected: Codable {
+    let height: Int
+    let weight: Int
+    let baseExperience: Int
+    let id: Int
     let sprites: Sprites
+    
+    enum CodingKeys: String, CodingKey {
+    case height
+    case weight
+    case baseExperience = "base_experience"
+    case id
+    case sprites
+    }
 }
 
 struct Sprites: Codable {

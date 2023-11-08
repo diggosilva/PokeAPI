@@ -37,21 +37,21 @@ class ViewController: UIViewController {
     }
     
     private func fetchData() {
-        dispatchGroup.enter()
-        service.getPokeName { results in
-            for result in results {
-                self.dispatchGroup.enter()
-                self.service.getPokeImage(name: result.name) { image in
-                    self.pokemons.append(PokemonModel(image: image, name: result.name))
-                    self.dispatchGroup.leave()
-                }
-            }
-            self.dispatchGroup.leave()
-        }
-        dispatchGroup.notify(queue: .main) {
-            self.pokeView.tableView.reloadData()
-            self.pokeView.activityIndicator.stopAnimating()
-        }
+//        dispatchGroup.enter()
+//        service.getPokeName { results in
+//            for result in results {
+//                self.dispatchGroup.enter()
+//                self.service.getPokeImage(name: result.name) { image in
+//                    self.pokemons.append(PokemonModel(image: image, name: result.name))
+//                    self.dispatchGroup.leave()
+//                }
+//            }
+//            self.dispatchGroup.leave()
+//        }
+//        dispatchGroup.notify(queue: .main) {
+//            self.pokeView.tableView.reloadData()
+//            self.pokeView.activityIndicator.stopAnimating()
+//        }
     }
 }
 
