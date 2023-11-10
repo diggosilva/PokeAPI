@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		92010A4A2AFBBA6300C565B9 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92010A492AFBBA6300C565B9 /* Color+Extensions.swift */; };
+		92010A4A2AFBBA6300C565B9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92010A492AFBBA6300C565B9 /* Extensions.swift */; };
 		92010A4C2AFBD53C00C565B9 /* PokeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92010A4B2AFBD53C00C565B9 /* PokeDetailsViewController.swift */; };
 		92010A4E2AFBD7B100C565B9 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92010A4D2AFBD7B100C565B9 /* Factory.swift */; };
 		92010A512AFBF33B00C565B9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92010A502AFBF33B00C565B9 /* LoginView.swift */; };
@@ -57,7 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		92010A492AFBBA6300C565B9 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		92010A492AFBBA6300C565B9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		92010A4B2AFBD53C00C565B9 /* PokeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeDetailsViewController.swift; sourceTree = "<group>"; };
 		92010A4D2AFBD7B100C565B9 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		92010A502AFBF33B00C565B9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		92010A482AFBBA4500C565B9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				92010A492AFBBA6300C565B9 /* Color+Extensions.swift */,
+				92010A492AFBBA6300C565B9 /* Extensions.swift */,
 				92010A4D2AFBD7B100C565B9 /* Factory.swift */,
 			);
 			path = Utils;
@@ -323,7 +323,7 @@
 				92D8FED92AFA998700CD0531 /* Service.swift in Sources */,
 				92010A4C2AFBD53C00C565B9 /* PokeDetailsViewController.swift in Sources */,
 				92D8FEC42AFA97B000CD0531 /* AppDelegate.swift in Sources */,
-				92010A4A2AFBBA6300C565B9 /* Color+Extensions.swift in Sources */,
+				92010A4A2AFBBA6300C565B9 /* Extensions.swift in Sources */,
 				92D8FEC62AFA97B000CD0531 /* SceneDelegate.swift in Sources */,
 				92010AA22AFC364A00C565B9 /* RegisterViewController.swift in Sources */,
 				929689C62AFAB48A00D455F9 /* PokeCell.swift in Sources */,

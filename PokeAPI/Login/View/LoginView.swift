@@ -86,7 +86,7 @@ class LoginView: UIView {
         attributedString.append(secondText)
         
         button.setAttributedTitle(attributedString, for: .normal)
-        button.addTarget(self, action: #selector(didTapGoToRegisterButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapGoToRegisterScreenButton), for: .touchUpInside)
         return button
     }()
     
@@ -107,7 +107,7 @@ class LoginView: UIView {
         delegate?.didTapButtonLogin()
     }
     
-    @objc func didTapGoToRegisterButton() {
+    @objc func didTapGoToRegisterScreenButton() {
         delegate?.didTapGoToRegisterButton()
     }
     

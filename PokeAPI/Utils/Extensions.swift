@@ -1,5 +1,5 @@
 //
-//  Color+Extensions.swift
+//  Extensions.swift
 //  PokeAPI
 //
 //  Created by Diggo Silva on 08/11/23.

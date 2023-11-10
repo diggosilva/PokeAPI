@@ -16,6 +16,8 @@ class PokeViewController: UIViewController {
     private let dispatchGroup = DispatchGroup()
     private var pokemons: [PokemonModel] = []
     
+    //MARK: - Lifecyle
+    
     override func loadView() {
         super.loadView()
         view = pokeView
@@ -28,6 +30,8 @@ class PokeViewController: UIViewController {
         fetchData()
         getCurrentUserEmail()
     }
+    
+    //MARK: - Methods
     
     private func getCurrentUserEmail() {
         if let user = Auth.auth().currentUser {
@@ -46,6 +50,8 @@ class PokeViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = .white
     }
     
+    //MARK: - Actions
+    
     @objc func didTapLogoutButton() {
         let firebaseAuth = Auth.auth()
         do {
@@ -56,10 +62,14 @@ class PokeViewController: UIViewController {
         }
     }
     
+    //MARK: - Setup TableView
+    
     private func setupTableViewDelegatesAndDataSources() {
         pokeView.tableView.delegate = self
         pokeView.tableView.dataSource = self
     }
+    
+    //MARK: - API Call
     
     private func fetchData() {
         dispatchGroup.enter()
@@ -79,6 +89,8 @@ class PokeViewController: UIViewController {
         }
     }
 }
+
+//MARK: - UITableViewDelegate UITableViewDataSource
 
 extension PokeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

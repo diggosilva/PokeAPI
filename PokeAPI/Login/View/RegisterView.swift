@@ -84,10 +84,9 @@ class RegisterView: UIView {
         attributedString.append(secondText)
         
         button.setAttributedTitle(attributedString, for: .normal)
-        button.addTarget(self, action: #selector(didTapGoToLoginButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapGoToLoginScreenButton), for: .touchUpInside)
         return button
     }()
-    
     
     // MARK: - Init
     
@@ -100,16 +99,14 @@ class RegisterView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Actions
-    
     
     @objc func didTapRegisterButton() {
         print("Clicou no botão")
         delegate?.didTapRegisterButton()
     }
     
-    @objc func didTapGoToLoginButton() {
+    @objc func didTapGoToLoginScreenButton() {
         delegate?.didTapGoToLoginButton()
     }
     
@@ -123,19 +120,10 @@ class RegisterView: UIView {
     private func setHierarchy () {
         backgroundColor = .bluePokeAPI
         
-        addSubview(logoImageView)
-        
-        addSubview(emailImageView)
-        addSubview(emailTextfield)
-        addSubview(emailSeparator)
-
-        addSubview(passwordImageView)
-        addSubview(passwordTextfield)
-        addSubview(passwordSeparator)
-        
-        addSubview(registerButton)
-        addSubview(haveAccountButton)
-        
+        addSubviews(views: [logoImageView,
+                            emailImageView, emailTextfield, emailSeparator,
+                            passwordImageView, passwordTextfield, passwordSeparator,
+                            registerButton, haveAccountButton])
     }
     
     private func setConstraints() {

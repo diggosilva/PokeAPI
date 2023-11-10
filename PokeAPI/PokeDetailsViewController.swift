@@ -9,6 +9,8 @@ import UIKit
 
 class PokeDetailsViewController: UIViewController {
     
+    // MARK: - Properties
+    
     lazy var cardView: UIView = {
         let cardView = UIView()
         cardView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,17 +55,23 @@ class PokeDetailsViewController: UIViewController {
         Factory.buildLabel(text: "Nome do Pokemon", font: .monospacedSystemFont(ofSize: 20, weight: .bold))
     }()
     
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         configNavigationBar()
     }
     
+    // MARK: - Methods Helpers
+    
     private func configNavigationBar() {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
         navigationItem.titleView = imageView
     }
+    
+    // MARK: - Setup View
     
     private func setupView() {
         setHierarchy()
