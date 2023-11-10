@@ -12,6 +12,10 @@ class PokeCell: UITableViewCell {
     
     static let identifier = "PokeCell"
     
+    
+    
+    // MARK: - Properties
+    
     lazy var pokeImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,6 +37,8 @@ class PokeCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
@@ -42,6 +48,8 @@ class PokeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
+    
     func configure(model: PokemonModel) {
         guard let url = URL(string: model.image) else { return }
         DispatchQueue.main.async {
@@ -49,6 +57,8 @@ class PokeCell: UITableViewCell {
             self.pokeLabel.text = model.name.capitalized
         }
     }
+    
+    // MARK: - Setup View
     
     private func setupView() {
         setHierarchy()

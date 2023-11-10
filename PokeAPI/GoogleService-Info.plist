@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAznPli0S0fQyLFbcHaAtsqw1RUJC5GUnk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>400877528382</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.diggosilva.PokeAPI</string>
+	<key>PROJECT_ID</key>
+	<string>pokeapi-74956</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pokeapi-74956.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:400877528382:ios:e0fb5acf1eb96a4e1b386f</string>
+</dict>
+</plist>

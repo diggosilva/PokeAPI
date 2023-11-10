@@ -7,8 +7,9 @@
 
 import UIKit
 import SDWebImage
+import FirebaseAuth
 
-class ViewController: UIViewController {
+class PokeViewController: UIViewController {
     
     private let pokeView = PokeView()
     private let service = Service.shared
@@ -25,12 +26,34 @@ class ViewController: UIViewController {
         configNavigationBar()
         setupTableViewDelegatesAndDataSources()
         fetchData()
+        getCurrentUserEmail()
+    }
+    
+    private func getCurrentUserEmail() {
+        if let user = Auth.auth().currentUser {
+            guard let userEmail = user.email else { return }
+            let button = Factory.buildButtonWith2Texts(button: pokeView.currentUserLogButton, firstString: "Logado com o email: ", firstStringFont: UIFont.systemFont(ofSize: 12), firstStringColor: UIColor.label, secondString: userEmail, secondStringFont: UIFont.systemFont(ofSize: 12, weight: .bold), secondStringColor: UIColor.systemGreen)
+        }
     }
     
     private func configNavigationBar() {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
         navigationItem.titleView = imageView
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", image: nil, target: self, action: #selector(didTapLogoutButton))
+        navigationItem.rightBarButtonItem?.tintColor = .white
+    }
+    
+    @objc func didTapLogoutButton() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            navigationController?.popToRootViewController(animated: true)
+        } catch let signOutError as NSError {
+            print("Erro ao deslogar: %@", signOutError)
+        }
     }
     
     private func setupTableViewDelegatesAndDataSources() {
@@ -57,7 +80,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension PokeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pokemons.count
     }

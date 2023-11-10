@@ -12,3 +12,9 @@ extension UIColor {
     static var bluePokeAPI = UIColor(red: 66/255, green: 96/255, blue: 165/255, alpha: 1.0)
     static var yellowPokeAPI = UIColor(red: 245/255, green: 204/255, blue: 61/255, alpha: 1.0)
 }
+
+extension UIView {
+    func addSubviews(views: [UIView]) {
+        views.forEach({ self.addSubview($0)})
+    }
+}

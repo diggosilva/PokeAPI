@@ -8,6 +8,9 @@
 import UIKit
 
 class PokeView: UIView {
+    
+    // MARK: - Properties
+    
     lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
@@ -17,12 +20,22 @@ class PokeView: UIView {
         return indicator
     }()
     
+    lazy var currentUserLogButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = .systemFont(ofSize: 12)
+        return button
+    }()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(PokeCell.self, forCellReuseIdentifier: PokeCell.identifier)
         return tableView
     }()
+    
+    
+    // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,6 +46,7 @@ class PokeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup View
     
     private func setupView() {
         setHierarchy()
@@ -40,13 +54,20 @@ class PokeView: UIView {
     }
     
     private func setHierarchy () {
+        backgroundColor = .systemBackground
+        addSubview(currentUserLogButton)
         addSubview(tableView)
         addSubview(activityIndicator)
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topAnchor),
+            currentUserLogButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            currentUserLogButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            currentUserLogButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            currentUserLogButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            tableView.topAnchor.constraint(equalTo: currentUserLogButton.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
