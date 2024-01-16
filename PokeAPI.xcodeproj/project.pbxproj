@@ -165,6 +165,41 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		92A39E0C2B56C852008F4525 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				92A39E0D2B56C880008F4525 /* List */,
+				92A39E0E2B56C891008F4525 /* Details */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		92A39E0D2B56C880008F4525 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				92D8FEC72AFA97B000CD0531 /* PokeViewController.swift */,
+				929689C32AFAAE6900D455F9 /* PokeView.swift */,
+				929689C52AFAB48A00D455F9 /* PokeCell.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		92A39E0E2B56C891008F4525 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				92010A4B2AFBD53C00C565B9 /* PokeDetailsViewController.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		92A39E0F2B56C8B1008F4525 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				921F8F012AFAC703008AAFC8 /* PokemonModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		92D8FEB72AFA97B000CD0531 = {
 			isa = PBXGroup;
 			children = (
@@ -188,11 +223,8 @@
 				92010A482AFBBA4500C565B9 /* Utils */,
 				92010A4F2AFBF2FB00C565B9 /* Service */,
 				92010AA32AFC368A00C565B9 /* Login */,
-				92D8FEC72AFA97B000CD0531 /* PokeViewController.swift */,
-				929689C32AFAAE6900D455F9 /* PokeView.swift */,
-				92010A4B2AFBD53C00C565B9 /* PokeDetailsViewController.swift */,
-				929689C52AFAB48A00D455F9 /* PokeCell.swift */,
-				921F8F012AFAC703008AAFC8 /* PokemonModel.swift */,
+				92A39E0C2B56C852008F4525 /* Screens */,
+				92A39E0F2B56C8B1008F4525 /* Model */,
 				92010A662AFC282900C565B9 /* GoogleService-Info.plist */,
 				92D8FED12AFA97B100CD0531 /* Info.plist */,
 			);
