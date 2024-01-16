@@ -15,6 +15,7 @@ class PokeViewController: UIViewController {
     private let service = Service.shared
     private let dispatchGroup = DispatchGroup()
     private var pokemons: [PokemonModel] = []
+    private var filteredPokemons: [PokemonModel] = []
     
     //MARK: - Lifecyle
     
@@ -26,8 +27,8 @@ class PokeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configNavigationBar()
-        setupTableViewDelegatesAndDataSources()
         fetchData()
+        setupDelegatesAndDataSources()
         getCurrentUserEmail()
     }
     
@@ -36,7 +37,7 @@ class PokeViewController: UIViewController {
     private func getCurrentUserEmail() {
         if let user = Auth.auth().currentUser {
             guard let userEmail = user.email else { return }
-            let button = Factory.buildButtonWith2Texts(button: pokeView.currentUserLogButton, firstString: "Logado com o email: ", firstStringFont: UIFont.systemFont(ofSize: 12), firstStringColor: UIColor.label, secondString: userEmail, secondStringFont: UIFont.systemFont(ofSize: 12, weight: .bold), secondStringColor: UIColor.systemGreen)
+            let button = Components.buildButtonWith2Texts(button: pokeView.currentUserLogButton, firstString: "Logado com o email: ", firstStringFont: UIFont.systemFont(ofSize: 12), firstStringColor: UIColor.label, secondString: userEmail, secondStringFont: UIFont.systemFont(ofSize: 12, weight: .bold), secondStringColor: UIColor.systemGreen)
         }
     }
     
@@ -64,9 +65,10 @@ class PokeViewController: UIViewController {
     
     //MARK: - Setup TableView
     
-    private func setupTableViewDelegatesAndDataSources() {
+    private func setupDelegatesAndDataSources() {
         pokeView.tableView.delegate = self
         pokeView.tableView.dataSource = self
+        pokeView.searchBar.delegate = self
     }
     
     //MARK: - API Call
@@ -76,8 +78,15 @@ class PokeViewController: UIViewController {
         service.getPokeName { results in
             for result in results {
                 self.dispatchGroup.enter()
-                self.service.getPokeImage(name: result.name) { image,height,weight,experience,id  in
-                    self.pokemons.append(PokemonModel(height: height, weight: weight, experience: experience, id: id, image: image, name: result.name))
+                self.service.getPokeImage(name: result.name) { pokemon in
+                    self.pokemons.append(PokemonModel(
+                        height: pokemon.height,
+                        weight: pokemon.weight,
+                        experience: pokemon.baseExperience,
+                        id: pokemon.id,
+                        image: pokemon.sprites.other.officialArtwork.frontDefault,
+                        name: result.name)
+                    )
                     self.dispatchGroup.leave()
                 }
             }
@@ -94,28 +103,63 @@ class PokeViewController: UIViewController {
 
 extension PokeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemons.count
+        return filteredPokemons.count == 0 ? pokemons.count : filteredPokemons.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PokeCell.identifier, for: indexPath) as? PokeCell else { return UITableViewCell() }
-        cell.configure(model: pokemons[indexPath.row])
+        if filteredPokemons.count == 0 {
+            cell.configure(model: pokemons[indexPath.row])
+        } else {
+            cell.configure(model: filteredPokemons[indexPath.row])
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = PokeDetailsViewController()
-        let pokeSelected = pokemons[indexPath.row]
-        guard let url = URL(string: pokeSelected.image) else { return }
-        DispatchQueue.main.async {
-            vc.imageView.sd_setImage(with: url)
-            vc.heightLabel.text = "Altura: \(pokeSelected.height)cm"
-            vc.weightLabel.text = "Peso: \(pokeSelected.weight)g"
-            vc.experienceLabel.text = "XP: \(pokeSelected.experience)"
-            vc.idLabel.text = "ID: \(pokeSelected.id)"
-            vc.nameLabel.text = "\(pokeSelected.name)".capitalized
+        if filteredPokemons.count == 0 {
+            let pokeSelected = pokemons[indexPath.row]
+            guard let url = URL(string: pokeSelected.image) else { return }
+            DispatchQueue.main.async {
+                vc.imageView.sd_setImage(with: url)
+                vc.heightLabel.text = "Altura: \(pokeSelected.height)cm"
+                vc.weightLabel.text = "Peso: \(pokeSelected.weight)g"
+                vc.experienceLabel.text = "XP: \(pokeSelected.experience)"
+                vc.idLabel.text = "ID: \(pokeSelected.id)"
+                vc.nameLabel.text = "\(pokeSelected.name)".capitalized
+            }
+        } else {
+            let pokeSelected = filteredPokemons[indexPath.row]
+            guard let url = URL(string: pokeSelected.image) else { return }
+            DispatchQueue.main.async {
+                vc.imageView.sd_setImage(with: url)
+                vc.heightLabel.text = "Altura: \(pokeSelected.height)cm"
+                vc.weightLabel.text = "Peso: \(pokeSelected.weight)g"
+                vc.experienceLabel.text = "XP: \(pokeSelected.experience)"
+                vc.idLabel.text = "ID: \(pokeSelected.id)"
+                vc.nameLabel.text = "\(pokeSelected.name)".capitalized
+            }
         }
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension PokeViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredPokemons = searchText.isEmpty ? pokemons : pokemons.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        pokeView.tableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        searchBar.resignFirstResponder()
+        filteredPokemons = pokemons
+        pokeView.tableView.reloadData()
     }
 }

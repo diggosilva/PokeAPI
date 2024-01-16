@@ -36,23 +36,23 @@ class PokeDetailsViewController: UIViewController {
     }()
     
     lazy var heightLabel: UILabel = {
-        Factory.buildLabel(text: "Altura:")
+        Components.buildLabel(text: "Altura:")
     }()
     
     lazy var weightLabel: UILabel = {
-        Factory.buildLabel(text: "Peso:")
+        Components.buildLabel(text: "Peso:")
     }()
     
     lazy var experienceLabel: UILabel = {
-        Factory.buildLabel(text: "XP:")
+        Components.buildLabel(text: "XP:")
     }()
     
     lazy var idLabel: UILabel = {
-        Factory.buildLabel(text: "ID:")
+        Components.buildLabel(text: "ID:")
     }()
     
     lazy var nameLabel: UILabel = {
-        Factory.buildLabel(text: "Nome do Pokemon", font: .monospacedSystemFont(ofSize: 20, weight: .bold))
+        Components.buildLabel(text: "Nome do Pokemon", font: .monospacedSystemFont(ofSize: 20, weight: .bold))
     }()
     
     // MARK: - Lifecycle

@@ -41,11 +41,11 @@ class LoginView: UIView {
     }()
     
     lazy var emailTextfield: UITextField = {
-        Factory.buildTextField(placeholder: "Email", keyboardType: .emailAddress)
+        Components.buildTextField(placeholder: "Email", keyboardType: .emailAddress)
     }()
     
     lazy var emailSeparator: UIView = {
-        Factory.buildSeparator()
+        Components.buildSeparator()
     }()
     
     lazy var passwordImageView: UIImageView = {
@@ -57,11 +57,11 @@ class LoginView: UIView {
     }()
     
     lazy var passwordTextfield: UITextField = {
-        Factory.buildTextField(placeholder: "Senha", keyboardType: .default, isSecureTextEntry: true)
+        Components.buildTextField(placeholder: "Senha", keyboardType: .default, isSecureTextEntry: true)
     }()
     
     lazy var passwordSeparator: UIView = {
-        Factory.buildSeparator()
+        Components.buildSeparator()
     }()
     
     lazy var loginButton: UIButton = {

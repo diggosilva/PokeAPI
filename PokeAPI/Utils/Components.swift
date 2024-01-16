@@ -1,5 +1,5 @@
 //
-//  Factory.swift
+//  Components.swift
 //  PokeAPI
 //
 //  Created by Diggo Silva on 08/11/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Factory {
+class Components {
     
     static func buildButtonWith2Texts(button: UIButton, firstString: String, firstStringFont: UIFont, firstStringColor: UIColor, secondString: String, secondStringFont: UIFont, secondStringColor: UIColor) -> UIButton {
         let button = button

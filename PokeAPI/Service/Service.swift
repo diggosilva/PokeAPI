@@ -30,7 +30,7 @@ struct Service {
         }.resume()
     }
     
-    func getPokeImage(name: String, completion: @escaping(String, Int, Int, Int, Int) -> Void) {
+    func getPokeImage(name: String, completion: @escaping(PokemonSelected) -> Void) {
         guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon/\(name)") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -38,7 +38,7 @@ struct Service {
             do {
                 let pokeImage = try JSONDecoder().decode(PokemonSelected.self, from: data)
                 DispatchQueue.main.async {
-                    completion(pokeImage.sprites.other.officialArtwork.frontDefault, pokeImage.height, pokeImage.weight, pokeImage.baseExperience, pokeImage.id)
+                    completion(pokeImage)
                 }
             } catch {
                 print("Erro na IMAGEM: \(error.localizedDescription)")

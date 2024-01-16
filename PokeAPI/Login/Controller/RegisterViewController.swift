@@ -70,7 +70,7 @@ extension RegisterViewController: RegisterViewDelegate {
     }
     
     func didTapGoToLoginButton() {
-        let vc = LoginViewController()
+//        let vc = LoginViewController()
         navigationController?.popToRootViewController(animated: true)
         registerView.emailTextfield.text = ""
         registerView.passwordTextfield.text = ""

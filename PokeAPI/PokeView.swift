@@ -27,6 +27,14 @@ class PokeView: UIView {
         return button
     }()
     
+    lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.placeholder = "Buscar"
+        searchBar.showsCancelButton = true
+        return searchBar
+    }()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -55,9 +63,7 @@ class PokeView: UIView {
     
     private func setHierarchy () {
         backgroundColor = .systemBackground
-        addSubview(currentUserLogButton)
-        addSubview(tableView)
-        addSubview(activityIndicator)
+        addSubviews(views: [currentUserLogButton, searchBar, tableView, activityIndicator])
     }
     
     private func setConstraints() {
@@ -67,7 +73,12 @@ class PokeView: UIView {
             currentUserLogButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             currentUserLogButton.heightAnchor.constraint(equalToConstant: 20),
             
-            tableView.topAnchor.constraint(equalTo: currentUserLogButton.bottomAnchor),
+            searchBar.topAnchor.constraint(equalTo: currentUserLogButton.bottomAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: trailingAnchor),
+            searchBar.heightAnchor.constraint(equalToConstant: 30),
+            
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),

@@ -12,8 +12,6 @@ class PokeCell: UITableViewCell {
     
     static let identifier = "PokeCell"
     
-    
-    
     // MARK: - Properties
     
     lazy var pokeImage: UIImageView = {
